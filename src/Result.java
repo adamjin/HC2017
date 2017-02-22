@@ -3,6 +3,7 @@
  * */
 public class Result {
 
+	
 	//this method convert the result info into the string to be written into the output file
 	public String toString(){
 		StringBuilder str = new StringBuilder();

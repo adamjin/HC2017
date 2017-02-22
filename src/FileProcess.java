@@ -38,19 +38,15 @@ public class FileProcess {
 	}
 	
 	public void writeOutputFile(Result result){
-		//impl
-		String resultString = result.toString();
-		writeStringIntoFile(resultString);
+		writeStringIntoFile(result.toString());
 	}
 	
-	public void writeOutputFile(String result){
-		//impl
-		String resultString = result;
-		writeStringIntoFile(resultString);
+	public void writeOutputFile(String str){
+		writeStringIntoFile(str);
 	}
 	
 	private void writeStringIntoFile(String resultString){
-		//impl
+		
 		byte data[] = resultString.getBytes();
 		Path file = Paths.get("./test.out");
 		try{
