@@ -12,54 +12,29 @@ import java.nio.file.Paths;
  * */
 public class FileProcess {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		FileProcess process = new FileProcess();
-		process.readInputFile("dataset/example.in");
-//		List<Integer[]> list = CutPizza.findFactors(6);
-//		for(Integer[] in: list){
-//			for(int i:in)
-//				System.out.print(i + " ");
-//			System.out.println();
-//		}
+		//read the file as a string
+		String inputString = process.readInputFile("dataset/example.in");
+		//do something with the inputString from here
+		//...
 	}
-	public HC2017DTO readInputFile(String path){
+	public String readInputFile(String path) throws IOException {
 		File file = new File(path);
 		String readLine = "";
-		int count = 0;
-		HC2017DTO dto = null;
-		List<String> list = new ArrayList<>();
+		StringBuilder strBuilder = new StringBuilder();
+	    String lineSeperator = System.getProperty("line.separator");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+
 			while((readLine=reader.readLine())!=null){
-				if(count==0){
-					count++;
-					String[] metaData = readLine.split(" ");
-					dto = new HC2017DTO(metaData);
-				}else{
-					list.add(readLine);
-				}
+				strBuilder.append(readLine);
+				strBuilder.append(lineSeperator);
 			}
-//			char[][] cells = new char[list.size()][];
-//			count=0;
-//			for(String row:list){
-//				cells[count++]= row.toCharArray();
-//			}
-//			pizza.setCell(cells);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return strBuilder.toString();
+		}  finally {
+			reader.close();
 		}
-//		System.out.println("Columns "+pizza.getColumn() +" Rows "+pizza.getRow()+" minSLiceLength "+pizza.getMinSliceLength()+ " maxSliceLength "+pizza.getMaxSliceLength() );
-//		for(char[] ch: pizza.getCell()){
-//			for(char c: ch)
-//			System.out.print(""+c);
-//			System.out.println();
-//		}
-		//pizza.setCell
-		return dto;
 	}
 	
 	public void writeOutputFile(Result result){
