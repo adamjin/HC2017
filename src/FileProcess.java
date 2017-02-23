@@ -40,7 +40,7 @@ public class FileProcess {
 		}
 	}
 	
-	public void writeOutputFile(Result result){
+	public void writeOutputFile(Output result){
 		writeStringIntoFile(result.toString());
 	}
 	
