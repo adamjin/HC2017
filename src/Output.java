@@ -30,9 +30,9 @@ public class Output {
 		str.append(this.numbrOfCacheServers).append("\\n");
 		for (Entry<Integer, List<Video>> entry : cachedVideos.entrySet())
 		{
-		    str.append(entry.getKey() + " ");
+			str.append(entry.getKey() + " ");
 		    for(Video video : entry.getValue()){
-		    	
+		    	str.append(video.getId())
 		    }
 		}
 		return str.toString();
