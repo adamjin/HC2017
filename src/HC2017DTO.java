@@ -56,6 +56,7 @@ public class HC2017DTO {
 				endpoint.setCacheEndpointLatencyMap(cacheEndpointLatencyMap);
 				curser++;
 			}
+			
 		}
 
 
