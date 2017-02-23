@@ -27,14 +27,13 @@ public class Output {
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder();
-		str.append(this.numbrOfCacheServers).append("\\n");
+		str.append(this.numbrOfCacheServers);
 		for (Entry<Integer, List<Video>> entry : cachedVideos.entrySet())
 		{
-			str.append(entry.getKey() + " ");
+			str.append("\n"+entry.getKey() + " ");
 		    for(Video video : entry.getValue()){
 		    	str.append(video.getId() + " ");
 		    } 
-		    str.append("\\n");
 		}
 		return str.toString();
 	}
