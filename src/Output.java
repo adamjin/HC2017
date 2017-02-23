@@ -32,8 +32,9 @@ public class Output {
 		{
 			str.append(entry.getKey() + " ");
 		    for(Video video : entry.getValue()){
-		    	str.append(video.getId())
-		    }
+		    	str.append(video.getId() + " ");
+		    } 
+		    str.append("\\n");
 		}
 		return str.toString();
 	}
