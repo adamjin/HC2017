@@ -13,6 +13,8 @@ public class HC2017DTO {
 	private  int numRequestD;
 	private int numCachedServers;
 	private int cachedServersCapacity;
+	private List<Video> videos;
+	private List<Endpoint> endpopints;
 //	private  List<CachedServer> cachedServers;
 
 
@@ -27,7 +29,7 @@ public class HC2017DTO {
 		this.cachedServersCapacity = Integer.parseInt(line0[4]);
 		curser++;
 		String line1[] = strList.get(curser).split(" ");
-		List<Video> videos = new ArrayList<>();
+		this.videos = new ArrayList<>();
 		for(int i=0; i< line1.length; i++){
 			Video v = new Video();
 			v.setId(i);
@@ -37,7 +39,7 @@ public class HC2017DTO {
 		}
 
 		curser++;
-		List<Endpoint> endpopints = new ArrayList<>();
+		this.endpopints = new ArrayList<>();
 		//the outer loop populates the End points
 		for(int i = 0 ; i < numEP; i++){
 			String [] a = strList.get(curser).split(" ");
