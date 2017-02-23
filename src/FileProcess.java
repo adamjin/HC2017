@@ -19,7 +19,9 @@ public class FileProcess {
 		//do something with the inputString from here
 		//e.g. to use the inputString to construct the dto, etc...
 		HC2017DTO dto = new HC2017DTO(inputString);
+
 	}
+		
 	public List<String> readInputFile(String path) throws IOException {
 		File file = new File(path);
 		String readLine = "";
