@@ -15,23 +15,23 @@ public class FileProcess {
 	public static void main(String[] args) throws IOException {
 		FileProcess process = new FileProcess();
 		//read the file as a string
-		String inputString = process.readInputFile("dataset/example.in");
+		List<String> inputString = process.readInputFile("dataset/example.in");
 		//do something with the inputString from here
 		//e.g. to use the inputString to construct the dto, etc...
 	}
-	public String readInputFile(String path) throws IOException {
+	public List<String> readInputFile(String path) throws IOException {
 		File file = new File(path);
 		String readLine = "";
-		StringBuilder strBuilder = new StringBuilder();
+		List<String> strBuilder = new ArrayList<>();
 	    String lineSeperator = System.getProperty("line.separator");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		try {
 
 			while((readLine=reader.readLine())!=null){
-				strBuilder.append(readLine);
-				strBuilder.append(lineSeperator);
+				strBuilder.add(readLine);
+				
 			}
-			return strBuilder.toString();
+			return strBuilder;
 		}  finally {
 			reader.close();
 		}
