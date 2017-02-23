@@ -15,11 +15,11 @@ public class FileProcess {
 	public static void main(String[] args) throws IOException {
 		FileProcess process = new FileProcess();
 		//read the file as a string
-		List<String> inputString = process.readInputFile("dataset/example.in");
+		List<String> inputString = process.readInputFile("dataset/me_at_the_zoo.in");
 		//do something with the inputString from here
 		//e.g. to use the inputString to construct the dto, etc...
 		HC2017DTO dto = new HC2017DTO(inputString);
-
+		dto.print();;
 	}
 		
 	public List<String> readInputFile(String path) throws IOException {

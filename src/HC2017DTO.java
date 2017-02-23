@@ -29,4 +29,12 @@ public class HC2017DTO {
 	public HC2017DTO(){
 		
 	}
+	
+	public void print(){
+		System.out.println("numV: " + this.numV);
+		System.out.println("numEP: " + this.numEP);
+		System.out.println("numRequestD: " + this.numRequestD);
+		System.out.println("numCachedServers: " + this.numCachedServers);
+		System.out.println("cachedServersCapacity: " + this.cachedServersCapacity);
+	}
 }
