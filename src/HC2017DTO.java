@@ -12,7 +12,7 @@ public class HC2017DTO {
 
 
 	//constructor which is initialized by the input string info
-	public HC2017DTO(String str[]){
+	public HC2017DTO(List<String> strList){
 		
 	}
 	
