@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * this is the object to which the input file should be rendered
@@ -15,7 +17,7 @@ public class HC2017DTO {
 	private int cachedServersCapacity;
 	private List<Video> videos;
 	private List<Endpoint> endpopints;
-	private List<Request> requests;
+	private Set<Request> requests;
 //	private  List<CachedServer> cachedServers;
 
 
@@ -31,7 +33,7 @@ public class HC2017DTO {
 		curser++;
 		String line1[] = strList.get(curser).split(" ");
 		this.videos = new ArrayList<>();
-		this.requests = new ArrayList<>();
+		this.requests = new HashSet<>();
 		for(int i=0; i< line1.length; i++){
 			Video v = new Video();
 			v.setId(i);

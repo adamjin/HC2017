@@ -1,16 +1,24 @@
 
-public class Request {
+public class Request implements Comparable<Request>{
 	private int numRequest;
 	private int videoId;
 	private int endpointId;
 	private int Endpoint;
+	private int bandwidth;
 	
+	public int getBandwidth() {
+		return bandwidth;
+	}
+	public void setBandwidth(int bandwidth) {
+		this.bandwidth = bandwidth;
+	}
 	public Request() {
 	}
 	public Request(int numRequest, int videoId, int endpointId) {
 		this.numRequest = numRequest;
 		this.videoId = videoId;
 		this.endpointId = endpointId;
+	//	this.bandwidth = bandwidth;
 	}
 	public int getNumRequest() {
 		return numRequest;
@@ -29,6 +37,10 @@ public class Request {
 	}
 	public void setEndpointId(int endpointId) {
 		this.endpointId = endpointId;
+	}
+	@Override
+	public int compareTo(Request o) {
+		return o.bandwidth-this.bandwidth;
 	}
 
 }
