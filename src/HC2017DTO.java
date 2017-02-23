@@ -15,6 +15,7 @@ public class HC2017DTO {
 	private int cachedServersCapacity;
 	private List<Video> videos;
 	private List<Endpoint> endpopints;
+	private List<Request> requests;
 //	private  List<CachedServer> cachedServers;
 
 
@@ -30,6 +31,7 @@ public class HC2017DTO {
 		curser++;
 		String line1[] = strList.get(curser).split(" ");
 		this.videos = new ArrayList<>();
+		this.requests = new ArrayList<>();
 		for(int i=0; i< line1.length; i++){
 			Video v = new Video();
 			v.setId(i);
@@ -59,6 +61,7 @@ public class HC2017DTO {
 				endpoint.setCacheEndpointLatencyMap(cacheEndpointLatencyMap);
 				curser++;
 			}
+			endpopints.add(endpoint);
 		}
 
 		//populates the map of <endpointId, numRequest> in video 
@@ -67,6 +70,8 @@ public class HC2017DTO {
 			Map<Integer , Integer> requestEndpointMap = new HashMap<Integer, Integer>();
 			requestEndpointMap.put(Integer.parseInt(c[1]), Integer.parseInt(c[2]));
 			videos.get(Integer.parseInt(c[0])).setRequestEndpointMap(requestEndpointMap);
+			Request request = new Request(Integer.parseInt(c[2]),Integer.parseInt(c[0]),Integer.parseInt(c[1]));
+			this.requests.add(request);
 			curser++;
 		}
 
