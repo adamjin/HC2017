@@ -46,7 +46,8 @@ public class HC2017DTO {
 			endpoint.setId(i);
 			endpoint.setDataCenterLatency(Integer.parseInt(a[0]));
 			endpoint.setNumberOfCaches(Integer.parseInt(a[1]));
-			
+			System.out.println("Endpoint " + endpoint.getId() + " has " + endpoint.getDataCenterLatency() 
+			+ " ms latency and is connected to " + endpoint.getNumberOfCaches() + " cache servers");
 			curser++;
 			//the inner loop populates the map in each end point
 			for(int j= 0; j<endpoint.getNumberOfCaches(); j++){
@@ -56,10 +57,16 @@ public class HC2017DTO {
 				endpoint.setCacheEndpointLatencyMap(cacheEndpointLatencyMap);
 				curser++;
 			}
-			
 		}
 
-
+		//populates the map of <endpointId, numRequest> in video 
+		for(int m = 0; m<numRequestD; m++){
+			String [] c = strList.get(curser).split(" ");
+			Map<Integer , Integer> requestEndpointMap = new HashMap<Integer, Integer>();
+			requestEndpointMap.put(Integer.parseInt(c[1]), Integer.parseInt(c[2]));
+			videos.get(Integer.parseInt(c[0])).setRequestEndpointMap(requestEndpointMap);
+			curser++;
+		}
 
 	}
 	
