@@ -22,7 +22,7 @@ public class FileProcess {
 		//e.g. to use the inputString to construct the dto, etc...
 		HC2017DTO dto = new HC2017DTO(inputString);
 		//use helper class to process the dto in order to get the result
-		
+		Helper.process(dto.getRequests(), dto.getVideos(), dto.getEndpopints());
 		
 //		dto.print();;
 //		Map<Integer, List<Video>> cachedVideos = new HashMap<>();

@@ -19,7 +19,7 @@ public class HC2017DTO {
 	private List<Endpoint> endpopints; //the list is in order as endpoint 1, 2, 3, 4...
 	private List<Request> requests; // this should be in order of bandwidth
 	private List<CachedServer> cachedServers;
-//	private  List<CachedServer> cachedServers;
+
 
 
 	//constructor which is initialized by the input string info
@@ -96,5 +96,77 @@ public class HC2017DTO {
 		System.out.println("numRequestD: " + this.numRequestD);
 		System.out.println("numCachedServers: " + this.numCachedServers);
 		System.out.println("cachedServersCapacity: " + this.cachedServersCapacity);
+	}
+
+	public int getNumV() {
+		return numV;
+	}
+
+	public void setNumV(int numV) {
+		this.numV = numV;
+	}
+
+	public int getNumEP() {
+		return numEP;
+	}
+
+	public void setNumEP(int numEP) {
+		this.numEP = numEP;
+	}
+
+	public int getNumRequestD() {
+		return numRequestD;
+	}
+
+	public void setNumRequestD(int numRequestD) {
+		this.numRequestD = numRequestD;
+	}
+
+	public int getNumCachedServers() {
+		return numCachedServers;
+	}
+
+	public void setNumCachedServers(int numCachedServers) {
+		this.numCachedServers = numCachedServers;
+	}
+
+	public int getCachedServersCapacity() {
+		return cachedServersCapacity;
+	}
+
+	public void setCachedServersCapacity(int cachedServersCapacity) {
+		this.cachedServersCapacity = cachedServersCapacity;
+	}
+
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
+
+	public List<Endpoint> getEndpopints() {
+		return endpopints;
+	}
+
+	public void setEndpopints(List<Endpoint> endpopints) {
+		this.endpopints = endpopints;
+	}
+
+	public List<Request> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<Request> requests) {
+		this.requests = requests;
+	}
+
+	public List<CachedServer> getCachedServers() {
+		return cachedServers;
+	}
+
+	public void setCachedServers(List<CachedServer> cachedServers) {
+		this.cachedServers = cachedServers;
 	}
 }

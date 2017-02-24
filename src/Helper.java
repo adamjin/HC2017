@@ -35,25 +35,17 @@ public class Helper {
 				       .sorted(Map.Entry.comparingByValue());
 			
 			for (Iterator<Entry<CachedServer, Integer>> i = sorted.iterator(); i.hasNext();){
-				
+				Entry<CachedServer, Integer> entry = i.next();
 					if(!existingVideioIds.contains(req.getVideoId()) &&
-							!(i.next().getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
-						i.next().getKey().getExistVideo().add(req.getVideoId());
+							!(entry.getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
+						entry.getKey().getExistVideo().add(req.getVideoId());
 						existingVideioIds.add(req.getVideoId());
-						
+						System.out.format("Video %d has been added into cache server %d \n", req.getVideoId(), entry.getKey().getId());
 					}
 			    }
-			
-//			for(CachedServer cache : ep.getCaches()){
-//				if(!existingVideioIds.contains(req.getVideoId()) &&
-//						!(cache.getCapacity() < vs.get(req.getVideoId()).getSize())){
-//					cache.getExistVideo().add(req.getVideoId());
-//					existingVideioIds.add(req.getVideoId());
-//					
-//				}
-//			}
 			
 		}
 		return null;
 	}
+	
 }
