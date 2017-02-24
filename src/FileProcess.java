@@ -23,6 +23,7 @@ public class FileProcess {
 		HC2017DTO dto = new HC2017DTO(inputString);
 		//use helper class to process the dto in order to get the result
 		
+		
 //		dto.print();;
 //		Map<Integer, List<Video>> cachedVideos = new HashMap<>();
 //		List<Video> videos = new ArrayList<>();
