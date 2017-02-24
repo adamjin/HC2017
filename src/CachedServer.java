@@ -2,14 +2,15 @@ import java.util.List;
 import java.util.Map;
 
 public class CachedServer {
+	private int id;
 	private int capacity;
 	private List<Integer> existVideo;
-	private Map<Integer, Integer> cacheLatencyMap;
-	public CachedServer(List<Integer> existVideo, int id, int capacity, Map<Integer, Integer> map) {
+//	private Map<Integer, Integer> cacheLatencyMap; //<endpointId, latency>
+	public CachedServer(List<Integer> existVideo, int id, int capacity) {
 		this.existVideo = existVideo;
 		this.id = id;
 		this.capacity = capacity;
-		this.cacheLatencyMap = map;
+//		this.cacheLatencyMap = map;
 	}
 	
 	public int getCapacity() {
@@ -25,7 +26,7 @@ public class CachedServer {
 	public void setExistVideo(List<Integer> existVideo) {
 		this.existVideo = existVideo;
 	}
-	private int id;
+
 
 	public int getId() {
 		return id;

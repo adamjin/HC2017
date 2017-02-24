@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Helper {
 
@@ -21,16 +24,30 @@ public class Helper {
 		
 		for(Request req:rqs){
 			Endpoint ep = endpoints.get(req.getEndpointId());
-			for(CachedServer cache : ep.getCaches()){
-				if(!existingVideioIds.contains(req.getVideoId()) &&
-						!(cache.getCapacity() < vs.get(req.getVideoId()).getSize())){
-					cache.getExistVideo().add(req.getVideoId());
-					existingVideioIds.add(req.getVideoId());
-					
-				}
-			}
-		//	if(cachedServrs.stream().filter(x -> x.getExistVideo().contains(vs.get(req.getVideoId()))) ;
-		
+			
+			Stream<Map.Entry<CachedServer, Integer>> sorted =
+				ep.getCacheEndpointLatencyMap().entrySet().stream()
+				       .sorted(Map.Entry.comparingByValue());
+			
+			for (Iterator<Entry<CachedServer, Integer>> i = sorted.iterator(); i.hasNext();){
+				
+					if(!existingVideioIds.contains(req.getVideoId()) &&
+							!(i.next().getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
+						i.next().getKey().getExistVideo().add(req.getVideoId());
+						existingVideioIds.add(req.getVideoId());
+						
+					}
+			    }
+			
+//			for(CachedServer cache : ep.getCaches()){
+//				if(!existingVideioIds.contains(req.getVideoId()) &&
+//						!(cache.getCapacity() < vs.get(req.getVideoId()).getSize())){
+//					cache.getExistVideo().add(req.getVideoId());
+//					existingVideioIds.add(req.getVideoId());
+//					
+//				}
+//			}
+			
 		}
 		return null;
 	}

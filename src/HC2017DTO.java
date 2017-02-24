@@ -59,18 +59,16 @@ public class HC2017DTO {
 			+ " ms latency and is connected to " + endpoint.getNumberOfCaches() + " cache servers");
 			curser++;
 			//the inner loop populates the map in each end point
-			List<CachedServer> caches = new ArrayList<>();
+
 			for(int j= 0; j<endpoint.getNumberOfCaches(); j++){
 				String [] b = strList.get(curser).split(" ");
-//				Map<Integer, Integer> cacheEndpointLatencyMap = new HashMap<Integer, Integer>();
-//				cacheEndpointLatencyMap.put(Integer.parseInt(b[0]), Integer.parseInt(b[1]));
-//				endpoint.setCacheEndpointLatencyMap(cacheEndpointLatencyMap);
 				//populate the caches
-		//		CachedServer cache = new CachedServer(null, Integer.parseInt(b[0]), cachedServersCapacity);
-		//		caches.add(cache);
+				Map<CachedServer, Integer> map = new HashMap<>();
+				CachedServer cache = new CachedServer(null, Integer.parseInt(b[0]), cachedServersCapacity);
+				map.put(cache, Integer.parseInt(b[1]));
+				endpoint.setCacheEndpointLatencyMap(map);
 				curser++;
-			}
-			endpoint.setCaches(caches);
+			}			
 			endpopints.add(endpoint);
 		}
 
