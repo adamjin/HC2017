@@ -1,11 +1,29 @@
+import java.util.List;
 import java.util.Map;
 
 public class Endpoint {
 	private int id;
 	private int dataCenterLatency;
 	private int numberOfCaches;
-	private Map<Integer, Integer> cacheEndpointLatencyMap;//key is cache id, value is latency
+	private List<CachedServer> caches;
+//	private Map<Integer, Integer> cacheEndpointLatencyMap;//key is cache id, value is latency
 	
+	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, List<CachedServer> caches) {
+		this.id = id;
+		this.dataCenterLatency = dataCenterLatency;
+		this.numberOfCaches = numberOfCaches;
+		this.caches = caches;
+//		this.cacheEndpointLatencyMap = cacheEndpointLatencyMap;
+	}
+	
+	public List<CachedServer> getCaches() {
+		return caches;
+	}
+
+	public void setCaches(List<CachedServer> caches) {
+		this.caches = caches;
+	}
+
 	public int getNumberOfCaches() {
 		return numberOfCaches;
 	}
@@ -18,12 +36,7 @@ public class Endpoint {
 		
 	}
 	
-	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, Map<Integer, Integer> cacheEndpointLatencyMap) {
-		this.id = id;
-		this.dataCenterLatency = dataCenterLatency;
-		this.numberOfCaches = numberOfCaches;
-		this.cacheEndpointLatencyMap = cacheEndpointLatencyMap;
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -36,11 +49,11 @@ public class Endpoint {
 	public void setDataCenterLatency(int dataCenterLatency) {
 		this.dataCenterLatency = dataCenterLatency;
 	}
-	public Map<Integer, Integer> getCacheEndpointLatencyMap() {
-		return cacheEndpointLatencyMap;
-	}
-	public void setCacheEndpointLatencyMap(Map<Integer, Integer> cacheEndpointLatencyMap) {
-		this.cacheEndpointLatencyMap = cacheEndpointLatencyMap;
-	}
+//	public Map<Integer, Integer> getCacheEndpointLatencyMap() {
+//		return cacheEndpointLatencyMap;
+//	}
+//	public void setCacheEndpointLatencyMap(Map<Integer, Integer> cacheEndpointLatencyMap) {
+//		this.cacheEndpointLatencyMap = cacheEndpointLatencyMap;
+//	}
 	
 }

@@ -15,10 +15,19 @@ public class Helper {
 		return rqs;
 	}
 	
-	public static Output output(Set<Request> rqs, List<Video> vs){
-		List<CachedServer> cachedServrs = new ArrayList<>();
+	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints){
+
+		
 		for(Request req:rqs){
+			Endpoint ep = endpoints.get(req.getEndpointId());
+			for(CachedServer cache : ep.getCaches()){
+				req.getVideoId();
+				cache.getCapacity();
+				cache.getExistVideo();
+				cache.getId();
+			}
 		//	if(cachedServrs.stream().filter(x -> x.getExistVideo().contains(vs.get(req.getVideoId()))) ;
+		
 		}
 		return null;
 	}

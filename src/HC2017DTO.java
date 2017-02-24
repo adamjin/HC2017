@@ -15,9 +15,10 @@ public class HC2017DTO {
 	private  int numRequestD;
 	private int numCachedServers;
 	private int cachedServersCapacity;
-	private List<Video> videos;
-	private List<Endpoint> endpopints;
-	private Set<Request> requests;
+	private List<Video> videos; //the list is in order as video 1, 2, 3, 4...
+	private List<Endpoint> endpopints; //the list is in order as endpoint 1, 2, 3, 4...
+	private List<Request> requests; // this should be in order of bandwidth
+	private List<CachedServer> cachedServers;
 //	private  List<CachedServer> cachedServers;
 
 
@@ -30,10 +31,12 @@ public class HC2017DTO {
 		this.numRequestD = Integer.parseInt(line0[2]);
 		this.numCachedServers = Integer.parseInt(line0[3]);
 		this.cachedServersCapacity = Integer.parseInt(line0[4]);
+		this.cachedServers = new ArrayList<>();
+		
 		curser++;
 		String line1[] = strList.get(curser).split(" ");
 		this.videos = new ArrayList<>();
-		this.requests = new HashSet<>();
+		this.requests = new ArrayList<>();
 		for(int i=0; i< line1.length; i++){
 			Video v = new Video();
 			v.setId(i);
@@ -56,13 +59,18 @@ public class HC2017DTO {
 			+ " ms latency and is connected to " + endpoint.getNumberOfCaches() + " cache servers");
 			curser++;
 			//the inner loop populates the map in each end point
+			List<CachedServer> caches = new ArrayList<>();
 			for(int j= 0; j<endpoint.getNumberOfCaches(); j++){
 				String [] b = strList.get(curser).split(" ");
-				Map<Integer, Integer> cacheEndpointLatencyMap = new HashMap<Integer, Integer>();
-				cacheEndpointLatencyMap.put(Integer.parseInt(b[0]), Integer.parseInt(b[1]));
-				endpoint.setCacheEndpointLatencyMap(cacheEndpointLatencyMap);
+//				Map<Integer, Integer> cacheEndpointLatencyMap = new HashMap<Integer, Integer>();
+//				cacheEndpointLatencyMap.put(Integer.parseInt(b[0]), Integer.parseInt(b[1]));
+//				endpoint.setCacheEndpointLatencyMap(cacheEndpointLatencyMap);
+				//populate the caches
+				CachedServer cache = new CachedServer(null, Integer.parseInt(b[0]), Integer.parseInt(b[1]));
+				caches.add(cache);
 				curser++;
 			}
+			endpoint.setCaches(caches);
 			endpopints.add(endpoint);
 		}
 

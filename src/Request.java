@@ -3,7 +3,7 @@ public class Request implements Comparable<Request>{
 	private int numRequest;
 	private int videoId;
 	private int endpointId;
-	private int Endpoint;
+	//private int Endpoint;
 	private int bandwidth;
 	
 	public int getBandwidth() {
