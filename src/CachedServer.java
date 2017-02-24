@@ -35,5 +35,8 @@ public class CachedServer {
 		this.id = id;
 	}
 	
+	public boolean isSameId(int id){
+		return this.id == id;
+	}
 	
 }
