@@ -45,8 +45,6 @@ public class Helper {
 						
 						entry.getKey().getExistVideo().add(req.getVideoId());
 						existingVideioIds.add(req.getVideoId());
-						
-
 						//	cachedServersVideoMap.get(entry.getKey())?null:cachedServersVideoMap.put(entry.getKey(), value)
 
 						System.out.format("-- Video %d has been added into cache server %d \n", req.getVideoId(), entry.getKey().getId());
