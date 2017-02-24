@@ -17,14 +17,17 @@ public class Helper {
 	
 	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints){
 
+		List<Integer> existingVideioIds = new ArrayList<>();
 		
 		for(Request req:rqs){
 			Endpoint ep = endpoints.get(req.getEndpointId());
 			for(CachedServer cache : ep.getCaches()){
-				req.getVideoId();
-				cache.getCapacity();
-				cache.getExistVideo();
-				cache.getId();
+				if(!existingVideioIds.contains(req.getVideoId()) &&
+						!(cache.getCapacity() < vs.get(req.getVideoId()).getSize())){
+					cache.getExistVideo().add(req.getVideoId());
+					existingVideioIds.add(req.getVideoId());
+					
+				}
 			}
 		//	if(cachedServrs.stream().filter(x -> x.getExistVideo().contains(vs.get(req.getVideoId()))) ;
 		

@@ -6,7 +6,7 @@ public class Endpoint {
 	private int dataCenterLatency;
 	private int numberOfCaches;
 	private List<CachedServer> caches;
-//	private Map<Integer, Integer> cacheEndpointLatencyMap;//key is cache id, value is latency
+	private Map<Integer, Integer> cacheEndpointLatencyMap;//key is cache id, value is latency
 	
 	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, List<CachedServer> caches) {
 		this.id = id;
