@@ -9,17 +9,22 @@ import java.util.stream.Stream;
 
 public class Helper {
 
-	public static Set<Request> calculate(Set<Request> rqs, List<Endpoint> eps){
-		Map<Integer, Integer> map = new HashMap<>(); 
-		for(Request rq : rqs){
-			Endpoint ep = eps.get(rq.getEndpointId());
-			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
-		}
-		return rqs;
-	}
+//	public static Set<Request> calculate(Set<Request> rqs, List<Endpoint> eps){
+//
+//		for(Request rq : rqs){
+//			Endpoint ep = eps.get(rq.getEndpointId());
+//			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
+//		}
+//		return rqs;
+//	}
 	
 	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints){
 
+		for(Request rq : rqs){
+			Endpoint ep = endpoints.get(rq.getEndpointId());
+			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
+		}
+		
 		List<Integer> existingVideioIds = new ArrayList<>();
 		
 		for(Request req:rqs){
