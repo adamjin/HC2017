@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public class Helper {
 	
 	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints){
 
+		Map<CachedServer, List<Integer>> cachedServersVideoMap = new HashMap<>();
+		Set<CachedServer> caches = new HashSet<>();
 		for(Request rq : rqs){
 			Endpoint ep = endpoints.get(rq.getEndpointId());
 			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
@@ -39,13 +42,26 @@ public class Helper {
 					if(!existingVideioIds.contains(req.getVideoId()) &&
 							!(entry.getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
 						
+						
 						entry.getKey().getExistVideo().add(req.getVideoId());
 						existingVideioIds.add(req.getVideoId());
+						
+
+						//	cachedServersVideoMap.get(entry.getKey())?null:cachedServersVideoMap.put(entry.getKey(), value)
+
 						System.out.format("-- Video %d has been added into cache server %d \n", req.getVideoId(), entry.getKey().getId());
 					}
 			    }
-			
+			caches.addAll(ep.getCacheEndpointLatencyMap().keySet());//there is a problem here -> adding same cache several times!!!
 		}
+		
+		for(CachedServer cache: caches){
+			
+			
+			System.out.println("cache server" + cache.getId() + " has video ");
+			cache.getExistVideo().forEach(System.out::println);
+		}
+	//	Output output = new Output(dto.numbrOfCacheServers, cachedVideos);
 		return null;
 	}
 	

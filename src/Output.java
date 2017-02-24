@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 public class Output {
 
 	private int numbrOfCacheServers;
-	private Map<Integer, List<Video>> cachedVideos;
+	private Map<Integer, List<Video>> cachedVideos; //Map<cacheServerId, List<Video>>
 	
 	
 	public Output(int numbrOfCacheServers, Map<Integer, List<Video>> cachedVideos) {
