@@ -26,10 +26,10 @@ public class Helper {
 		}
 		
 		List<Integer> existingVideioIds = new ArrayList<>();
-		
+
 		for(Request req:rqs){
 			Endpoint ep = endpoints.get(req.getEndpointId());
-			
+			System.out.format("- Processing endpoint %d req bandwitch %d \n", ep.getId(), req.getBandwidth());
 			Stream<Map.Entry<CachedServer, Integer>> sorted =
 				ep.getCacheEndpointLatencyMap().entrySet().stream()
 				       .sorted(Map.Entry.comparingByValue());
@@ -38,9 +38,10 @@ public class Helper {
 				Entry<CachedServer, Integer> entry = i.next();
 					if(!existingVideioIds.contains(req.getVideoId()) &&
 							!(entry.getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
+						
 						entry.getKey().getExistVideo().add(req.getVideoId());
 						existingVideioIds.add(req.getVideoId());
-						System.out.format("Video %d has been added into cache server %d \n", req.getVideoId(), entry.getKey().getId());
+						System.out.format("-- Video %d has been added into cache server %d \n", req.getVideoId(), entry.getKey().getId());
 					}
 			    }
 			

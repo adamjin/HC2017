@@ -64,7 +64,7 @@ public class HC2017DTO {
 				String [] b = strList.get(curser).split(" ");
 				//populate the caches
 				Map<CachedServer, Integer> map = new HashMap<>();
-				CachedServer cache = new CachedServer(null, Integer.parseInt(b[0]), cachedServersCapacity);
+				CachedServer cache = new CachedServer(new ArrayList<Integer>(), Integer.parseInt(b[0]), cachedServersCapacity);
 				map.put(cache, Integer.parseInt(b[1]));
 				endpoint.setCacheEndpointLatencyMap(map);
 				curser++;
