@@ -42,7 +42,7 @@ public class HC2017DTO {
 			v.setId(i);
 			v.setSize(Integer.parseInt(line1[i]));
 			videos.add(v);
-			System.out.println("Video " + v.getId() + " has size: " + v.getSize());
+//			System.out.println("Video " + v.getId() + " has size: " + v.getSize());
 		}
 
 		curser++;
@@ -56,8 +56,8 @@ public class HC2017DTO {
 			endpoint.setId(i);
 			endpoint.setDataCenterLatency(Integer.parseInt(a[0]));
 			endpoint.setNumberOfCaches(Integer.parseInt(a[1]));
-			System.out.println("Endpoint " + endpoint.getId() + " has " + endpoint.getDataCenterLatency() 
-			+ " ms latency and is connected to " + endpoint.getNumberOfCaches() + " cache servers");
+//			System.out.println("Endpoint " + endpoint.getId() + " has " + endpoint.getDataCenterLatency() 
+//			+ " ms latency and is connected to " + endpoint.getNumberOfCaches() + " cache servers");
 			curser++;
 			//the inner loop populates the map in each end point
 
@@ -78,7 +78,7 @@ public class HC2017DTO {
 			cachedServers.add(cache);
 		}
 
-		System.out.println("Number of caache servers "+cachedServers.size());
+//		System.out.println("Number of caache servers "+cachedServers.size());
 		//populates the map of <endpointId, numRequest> in video 
 		for(int m = 0; m<numRequestD; m++){
 			String [] c = strList.get(curser).split(" ");

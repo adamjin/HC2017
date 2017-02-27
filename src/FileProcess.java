@@ -29,15 +29,20 @@ public class FileProcess {
 		HC2017DTO dto_3 = new HC2017DTO(inputString_3);
 		HC2017DTO dto_4 = new HC2017DTO(inputString_4);
 		//use helper class to process the dto in order to get the result
+		
+		System.out.println("Start processing videos_worth_spreading");
 		Output output_1 = Helper.process(dto_1.getRequests(), dto_1.getVideos(), dto_1.getEndpopints(), dto_1.getCachedServers());
 		process.writeOutputFile(output_1, "videos_worth_spreading");
 		
+		System.out.println("Start processing trending_today");
 		Output output_2 = Helper.process(dto_2.getRequests(), dto_2.getVideos(), dto_2.getEndpopints(), dto_2.getCachedServers());
 		process.writeOutputFile(output_2, "trending_today");
 
+		System.out.println("Start processing me_at_the_zoo");
 		Output output_3 = Helper.process(dto_3.getRequests(), dto_3.getVideos(), dto_3.getEndpopints(), dto_3.getCachedServers());
 		process.writeOutputFile(output_3, "me_at_the_zoo");
 
+		System.out.println("Start processing kittens");
 		Output output_4 = Helper.process(dto_4.getRequests(), dto_4.getVideos(), dto_4.getEndpopints(), dto_4.getCachedServers());
 		process.writeOutputFile(output_4, "kittens");
 
@@ -48,7 +53,7 @@ public class FileProcess {
 		File file = new File(path);
 		String readLine = "";
 		List<String> strBuilder = new ArrayList<>();
-	    String lineSeperator = System.getProperty("line.separator");
+//	    String lineSeperator = System.getProperty("line.separator");
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		try {
 
