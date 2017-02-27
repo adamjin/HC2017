@@ -14,7 +14,7 @@ public class Helper {
 	
 	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints, List<CachedServer> cachedServerList){
 
-		System.out.println("Video size "+vs.size()+ " Request size "+rqs.size() + " endpoints size "+endpoints.size()  );
+//		System.out.println("Video size "+vs.size()+ " Request size "+rqs.size() + " endpoints size "+endpoints.size()  );
 		for(Request rq : rqs){
 			Endpoint ep = endpoints.get(rq.getEndpointId());
 			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
