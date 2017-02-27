@@ -47,6 +47,7 @@ public class HC2017DTO {
 
 		curser++;
 		this.endpopints = new ArrayList<>();
+		Map<Integer, CachedServer> CachedServerMap = new HashMap();
 		//the outer loop populates the End points
 		for(int i = 0 ; i < numEP; i++){
 			String [] a = strList.get(curser).split(" ");
@@ -60,18 +61,24 @@ public class HC2017DTO {
 			curser++;
 			//the inner loop populates the map in each end point
 
+			List<Integer> cacheList = new ArrayList<>();
 			for(int j= 0; j<endpoint.getNumberOfCaches(); j++){
 				String [] b = strList.get(curser).split(" ");
 				//populate the caches
-				Map<CachedServer, Integer> map = new HashMap<>();
-				CachedServer cache = new CachedServer(new ArrayList<Integer>(), Integer.parseInt(b[0]), cachedServersCapacity);
-				map.put(cache, Integer.parseInt(b[1]));
-				endpoint.setCacheEndpointLatencyMap(map);
+				CachedServer cache = new CachedServer(new ArrayList<>(), Integer.parseInt(b[0]), cachedServersCapacity, Integer.parseInt(b[1]));
+				CachedServerMap.put(Integer.parseInt(b[0]), cache);
+				cacheList.add( Integer.parseInt(b[0]));
+				endpoint.setCacheEndpointLatencyMap(cacheList);
 				curser++;
 			}			
 			endpopints.add(endpoint);
+			
+		}
+		for(CachedServer cache :CachedServerMap.values()){
+			cachedServers.add(cache);
 		}
 
+		System.out.println("Number of caache servers "+cachedServers.size());
 		//populates the map of <endpointId, numRequest> in video 
 		for(int m = 0; m<numRequestD; m++){
 			String [] c = strList.get(curser).split(" ");

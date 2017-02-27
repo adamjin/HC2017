@@ -6,25 +6,25 @@ public class Endpoint {
 	private int dataCenterLatency;
 	private int numberOfCaches;
 //	private List<CachedServer> caches;
-	private Map<CachedServer, Integer> cacheEndpointLatencyMap;//key is cache id, value is latency
+	private List< Integer> cacheServerIds;//key is cache id, value is latency
 	
-	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, Map<CachedServer, Integer> cacheEndpointLatencyMap) {
+	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, List< Integer> cacheServerIds) {
 		this.id = id;
 		this.dataCenterLatency = dataCenterLatency;
 		this.numberOfCaches = numberOfCaches;
-		this.cacheEndpointLatencyMap = cacheEndpointLatencyMap;
+		this.cacheServerIds = cacheServerIds;
 	}
 	
 
 
-	public Map<CachedServer, Integer> getCacheEndpointLatencyMap() {
-		return cacheEndpointLatencyMap;
+	public List< Integer> getCacheEndpointLatencyMap() {
+		return cacheServerIds;
 	}
 
 
 
-	public void setCacheEndpointLatencyMap(Map<CachedServer, Integer> cacheEndpointLatencyMap) {
-		this.cacheEndpointLatencyMap = cacheEndpointLatencyMap;
+	public void setCacheEndpointLatencyMap(List< Integer> cacheServerIds) {
+		this.cacheServerIds = cacheServerIds;
 	}
 
 

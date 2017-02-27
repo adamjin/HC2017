@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,68 +21,85 @@ public class Helper {
 //		return rqs;
 //	}
 	
-	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints){
+	public static Output process(List<Request> rqs, List<Video> vs, List<Endpoint> endpoints, List<CachedServer> cachedServerList){
 
-		Map<Integer, List<Integer>> cachedServersVideoMap = new HashMap<>();
-		Set<CachedServer> caches = new HashSet<>();
+		System.out.println("Video size "+vs.size()+ " Request size "+rqs.size() + " endpoints size "+endpoints.size()  );
 		for(Request rq : rqs){
 			Endpoint ep = endpoints.get(rq.getEndpointId());
 			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
-		}
-		
+		}//Sort the requests
+		Collections.sort(rqs);
 		List<Integer> existingVideioIds = new ArrayList<>();
+		Map<Integer, CachedServer> cachedServersStored = new HashMap<>();
+		Collections.sort(cachedServerList);
+		for(CachedServer cache : cachedServerList){
+			cachedServersStored.put(cache.getId(), cache);
+		}
+		Map<Integer, CachedServer> servers = new HashMap<>();
 
 		for(Request req:rqs){
+			//if(!checkVideoAlreadyInAnyServer(cachedServerList, req)){
+				
 			Endpoint ep = endpoints.get(req.getEndpointId());
-//			System.out.format("- Processing endpoint %d req bandwitch %d \n", ep.getId(), req.getBandwidth());
-			Stream<Map.Entry<CachedServer, Integer>> sorted =
-				ep.getCacheEndpointLatencyMap().entrySet().stream()
-				       .sorted(Map.Entry.comparingByValue());
-			
-			for (Iterator<Entry<CachedServer, Integer>> i = sorted.iterator(); i.hasNext();){
-				Entry<CachedServer, Integer> entry = i.next();
-					if(!existingVideioIds.contains(req.getVideoId()) &&
-							!(entry.getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
-						
-						
-						entry.getKey().getExistVideo().add(req.getVideoId());
-						existingVideioIds.add(req.getVideoId());
-						//	cachedServersVideoMap.get(entry.getKey())?null:cachedServersVideoMap.put(entry.getKey(), value)
-
+			//System.out.format("- Processing endpoint %d req bandwitch %d \n", ep.getId(), req.getBandwidth());
+//			Stream<Map.Entry<CachedServer, Integer>> sorted =
+//				ep.getCacheEndpointLatencyMap().entrySet().stream()
+//				       .sorted(Map.Entry.comparingByValue());
+//			
+//			for (Iterator<Entry<CachedServer, Integer>> i = sorted.iterator(); i.hasNext();){
+//				Entry<CachedServer, Integer> entry = i.next();
+//					if(!existingVideioIds.contains(req.getVideoId()) &&
+//							!(entry.getKey().getCapacity() < vs.get(req.getVideoId()).getSize())){
+//						
+//						entry.getKey().getExistVideo().add(req.getVideoId());
+//						existingVideioIds.add(req.getVideoId());
 //						System.out.format("-- Video %d has been added into cache server %d \n", req.getVideoId(), entry.getKey().getId());
-					}
-			    }
-			caches.addAll(ep.getCacheEndpointLatencyMap().keySet());//there is a problem here -> adding same cache several times!!!
-		}
-		
-		for(CachedServer cache: caches){
-			if(cachedServersVideoMap.isEmpty()){
-				cachedServersVideoMap.put(cache.getId(), cache.getExistVideo());
-			}
-			else{
-				for(Integer c : cachedServersVideoMap.keySet()){
-					if(c !=cache.getId()){
-						cachedServersVideoMap.put(c, cache.getExistVideo());
-					}
-					else{
-					//	cache.getExistVideo().addAll(cachedServersVideoMap.get(cache));
-						List<Integer> list1 = cachedServersVideoMap.get(cache);
-						list1.addAll(cache.getExistVideo());
-						cachedServersVideoMap.put(c, list1);
-					}
+//					}
+//			 }
+			List<Integer> listOfCachedIds = ep.getCacheEndpointLatencyMap();
+			if(listOfCachedIds!=null){
+			List<CachedServer> cacheSever = new ArrayList<>();
+				for(Integer i: listOfCachedIds){
+					cacheSever.add(cachedServersStored.get(i));
+				}
+					
+				for (CachedServer cache : cacheSever) {
+					if(!checkVideoAlreadyInAnyServer(cacheSever, req)){
+						if (!checkVideoExists(cache, req) && cache.getCapacity() >= vs.get(req.getVideoId()).getSize()) {
+							cache.getExistVideo().add(req.getVideoId());
+							cache.setCapacity(cache.getCapacity()-vs.get(req.getVideoId()).getSize());
+							if (servers.get(cache.getId())==null) {
+								servers.put(cache.getId(), cache);
+							}
+						}
+				}
 				}
 			}
-			
-			
-
 		}
 		
-		for(Integer cache : cachedServersVideoMap.keySet()){
-			System.out.println("cache server" + cache + " has video ");
-			cachedServersVideoMap.get(cache).forEach(System.out::println);
-		}
-	//	Output output = new Output(dto.numbrOfCacheServers, cachedVideos);
-		return null;
+		Output output = new Output();
+		Map<Integer, List<Integer>> map =  new HashMap<>();
+			for(CachedServer  server: servers.values()){
+				map.put(server.getId(), server.getExistVideo());
+			}
+			output.setNumbrOfCacheServers(servers.size());
+			output.setCachedVideos(map);
+		return output;
 	}
+
+
+private static boolean checkVideoAlreadyInAnyServer(List<CachedServer> cachedServerList, Request req) {
+	for(CachedServer cacche: cachedServerList){
+		if(cacche.getExistVideo().contains(req.getVideoId())){
+			return true;
+		}
+		
+	}
+	return false;
+}
+
+private static boolean checkVideoExists(CachedServer server, Request req) {
+    return server.getExistVideo().contains(req.getVideoId());
+}
 	
 }

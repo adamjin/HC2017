@@ -17,13 +17,17 @@ public class FileProcess {
 	public static void main(String[] args) throws IOException {
 		FileProcess process = new FileProcess();
 		//read the file as a string
-		List<String> inputString = process.readInputFile("dataset/me_at_the_zoo.in");
+		List<String> inputString = process.readInputFile("dataset/videos_worth_spreading.in");
+//		List<String> inputString = process.readInputFile("dataset/trending_today.in");
+//		List<String> inputString = process.readInputFile("dataset/me_at_the_zoo.in");
+//		List<String> inputString = process.readInputFile("dataset/kittens.in");
+
 		//do something with the inputString from here
 		//e.g. to use the inputString to construct the dto, etc...
 		HC2017DTO dto = new HC2017DTO(inputString);
 		//use helper class to process the dto in order to get the result
-		Helper.process(dto.getRequests(), dto.getVideos(), dto.getEndpopints());
-		
+		Output output = Helper.process(dto.getRequests(), dto.getVideos(), dto.getEndpopints(), dto.getCachedServers());
+		process.writeOutputFile(output);
 //		dto.print();;
 //		Map<Integer, List<Video>> cachedVideos = new HashMap<>();
 //		List<Video> videos = new ArrayList<>();
