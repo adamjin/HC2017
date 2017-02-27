@@ -6,13 +6,12 @@ public class CachedServer  implements Comparable<CachedServer>{
 	private int capacity;
 	private List<Integer> existVideo;
 	private int latency;
-//	private Map<Integer, Integer> cacheLatencyMap; //<endpointId, latency>
+
 	public CachedServer(List<Integer> existVideo, int id, int capacity, int latency) {
 		this.existVideo = existVideo;
 		this.id = id;
 		this.capacity = capacity;
 		this.latency = latency;
-//		this.cacheLatencyMap = map;
 	}
 	
 	public int getCapacity() {
