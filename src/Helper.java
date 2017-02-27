@@ -39,6 +39,9 @@ public class Helper {
 					cacheSever.add(cachedServersStored.get(i));
 				}
 					
+				Collections.sort(cacheSever, (a, b) -> b.compareTo(a));
+				Collections.reverse(cacheSever);
+				
 				for (CachedServer cache : cacheSever) {
 					if(!checkVideoAlreadyInAnyServer(cacheSever, req)){
 						if (!checkVideoExists(cache, req) && cache.getCapacity() >= vs.get(req.getVideoId()).getSize()) {
