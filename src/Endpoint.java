@@ -7,20 +7,21 @@ public class Endpoint {
 	private int numberOfCaches;
 	private List< Integer> cacheServerIds;
 	
-	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, List< Integer> cacheServerIds) {
+	public List<Integer> getCacheServerIds() {
+		return cacheServerIds;
+	}
+
+	public void setCacheServerIds(List<Integer> cacheServerIds) {
+		this.cacheServerIds = cacheServerIds;
+	}
+
+	public Endpoint(int id, int dataCenterLatency,int numberOfCaches, List<Integer> cacheServerIds) {
 		this.id = id;
 		this.dataCenterLatency = dataCenterLatency;
 		this.numberOfCaches = numberOfCaches;
 		this.cacheServerIds = cacheServerIds;
 	}
 	
-	public List< Integer> getCacheEndpointLatencyMap() {
-		return cacheServerIds;
-	}
-
-	public void setCacheEndpointLatencyMap(List< Integer> cacheServerIds) {
-		this.cacheServerIds = cacheServerIds;
-	}
 
 	public int getNumberOfCaches() {
 		return numberOfCaches;

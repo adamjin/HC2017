@@ -16,8 +16,28 @@ public class Helper {
 
 //		System.out.println("Video size "+vs.size()+ " Request size "+rqs.size() + " endpoints size "+endpoints.size()  );
 		for(Request rq : rqs){
+			List<CachedServer> caches = new ArrayList<>();
+			
 			Endpoint ep = endpoints.get(rq.getEndpointId());
-			rq.setBandwidth(ep.getDataCenterLatency()*rq.getNumRequest());
+			List<Integer> cacheIds  = ep.getCacheServerIds();
+			
+			int minLatency = 0;
+//			int maxLatency = 0;
+			if(cacheIds!=null){
+//				System.out.print("[");
+				for(int id : cacheIds){
+					caches.add(cachedServerList.get(id));
+				}
+				Collections.sort(caches);
+				minLatency = caches.get(0).getLatency();
+//				Collections.reverse(caches);
+//				maxLatency = caches.get(0).getLatency();
+//				caches.stream().forEach(e-> e.printLatency());
+//				System.out.println("]");
+			}
+			
+			rq.setBandwidth((ep.getDataCenterLatency()- minLatency)*rq.getNumRequest());
+			
 		}//Sort the requests
 		Collections.sort(rqs);
 		List<Integer> existingVideioIds = new ArrayList<>();
@@ -32,7 +52,7 @@ public class Helper {
 				
 			Endpoint ep = endpoints.get(req.getEndpointId());
 
-			List<Integer> listOfCachedIds = ep.getCacheEndpointLatencyMap();
+			List<Integer> listOfCachedIds = ep.getCacheServerIds();
 			if(listOfCachedIds!=null){
 			List<CachedServer> cacheSever = new ArrayList<>();
 				for(Integer i: listOfCachedIds){

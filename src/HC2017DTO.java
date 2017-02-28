@@ -68,7 +68,7 @@ public class HC2017DTO {
 				CachedServer cache = new CachedServer(new ArrayList<>(), Integer.parseInt(b[0]), cachedServersCapacity, Integer.parseInt(b[1]));
 				CachedServerMap.put(Integer.parseInt(b[0]), cache);
 				cacheList.add( Integer.parseInt(b[0]));
-				endpoint.setCacheEndpointLatencyMap(cacheList);
+				endpoint.setCacheServerIds(cacheList);
 				curser++;
 			}			
 			endpopints.add(endpoint);

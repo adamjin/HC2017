@@ -49,6 +49,8 @@ public class CachedServer  implements Comparable<CachedServer>{
 		return this.latency-o.latency;
 	}
 	
-	
+	public void printLatency(){
+		System.out.print(this.latency + " | ");
+	}
 	
 }
